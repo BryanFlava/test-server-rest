@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 05 Apr 2022 pada 10.01
+-- Waktu pembuatan: 14 Apr 2022 pada 04.03
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 8.1.2
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `buku` (
-  `id_buku` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `nama_buku` varchar(20) NOT NULL,
   `jenis_buku` varchar(20) NOT NULL,
   `nama_penerbit` varchar(20) NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE `buku` (
 -- Dumping data untuk tabel `buku`
 --
 
-INSERT INTO `buku` (`id_buku`, `nama_buku`, `jenis_buku`, `nama_penerbit`, `tahun_penerbit`) VALUES
+INSERT INTO `buku` (`id`, `nama_buku`, `jenis_buku`, `nama_penerbit`, `tahun_penerbit`) VALUES
 (2, 'WORLD', 'M1', 'EVOS', 2019),
 (3, 'Lemon', 'M2', 'RRQ', 2020),
 (4, 'War Galaxy', 'Sejarah', 'ONIC', 2018),
@@ -49,6 +49,30 @@ INSERT INTO `buku` (`id_buku`, `nama_buku`, `jenis_buku`, `nama_penerbit`, `tahu
 (8, 'GREEN TEA', 'MEMASAK', 'JEPAN LIBRARY', 2020),
 (9, 'REST API', 'PEMROGRAMAN', 'Bryan Samperura', 2025),
 (10, 'RPL', 'PROGRAMER', 'Erlangga', 2020);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `keys`
+--
+
+CREATE TABLE `keys` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `key` varchar(40) NOT NULL,
+  `level` int(2) NOT NULL,
+  `ignore_limits` tinyint(1) NOT NULL DEFAULT 0,
+  `is_private_key` tinyint(1) NOT NULL DEFAULT 0,
+  `ip_addresses` text DEFAULT NULL,
+  `date_created` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data untuk tabel `keys`
+--
+
+INSERT INTO `keys` (`id`, `user_id`, `key`, `level`, `ignore_limits`, `is_private_key`, `ip_addresses`, `date_created`) VALUES
+(1, 1, 'Kitten123', 1, 0, 0, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -137,7 +161,13 @@ INSERT INTO `user` (`id`, `username`, `email`, `no_hp`) VALUES
 -- Indeks untuk tabel `buku`
 --
 ALTER TABLE `buku`
-  ADD PRIMARY KEY (`id_buku`);
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `keys`
+--
+ALTER TABLE `keys`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indeks untuk tabel `penerbit`
@@ -156,6 +186,16 @@ ALTER TABLE `rak`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT untuk tabel yang dibuang
+--
+
+--
+-- AUTO_INCREMENT untuk tabel `keys`
+--
+ALTER TABLE `keys`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
