@@ -12,7 +12,7 @@ class Buku extends REST_Controller {
         $this->load->database();
     }
 
-    //Menampilkan data kontak
+    //Menampilkan data Buku
     function index_get() {
         $id = $this->get('id');
         if ($id == '') {
@@ -24,10 +24,10 @@ class Buku extends REST_Controller {
         $this->response($buku, 200);
     }
 
-//Mengirim atau menambah data kontak baru
+//Mengirim atau menambah data Buku baru
 function index_post() {
     $data = array(
-    'id_buku' => $this->post('id_buku'),
+    'id' => $this->post('id'),
     'nama_buku' => $this->post('nama_buku'),
     'jenis_buku' => $this->post('jenis_buku'),
     'nama_penerbit' => $this->post('nama_penerbit'),
@@ -40,16 +40,16 @@ function index_post() {
     }
     }
 
-  //Memperbarui data kontak yang telah ada
+  //Memperbarui data Buku yang telah ada
 function index_put() {
-    $id = $this->put('id_buku');
+    $id = $this->put('id');
     $data = array(
-    'id_buku' => $this->put('id_buku'),
+    'id' => $this->put('id'),
    'nama_buku' => $this->put('nama_buku'),
    'jenis_buku' => $this->put('jenis_buku'),
    'nama_penerbit' => $this->put('nama_penerbit'),
     'tahun_penerbit' => $this->put('tahun_penerbit'));
-    $this->db->where('id_buku', $id);
+    $this->db->where('id', $id);
     $update = $this->db->update('buku', $data);
     if ($update) {
     $this->response($data, 200);
@@ -57,10 +57,10 @@ function index_put() {
     $this->response(array('status' => 'fail', 502));
     }
     }
-    //Menghapus salah satu data kontak
+    //Menghapus salah satu data Buku
 function index_delete() {
-    $id = $this->delete('id_buku');
-    $this->db->where('id_buku', $id);
+    $id = $this->delete('id');
+    $this->db->where('id', $id);
     $delete = $this->db->delete('buku');
     if ($delete) {
     $this->response(array('status' => 'success'), 201);

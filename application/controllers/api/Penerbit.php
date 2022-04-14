@@ -12,7 +12,7 @@ class Penerbit extends REST_Controller {
         $this->load->database();
     }
 
-    //Menampilkan data Buku
+    //Menampilkan data Penerbit
     function index_get() {
         $id = $this->get('id');
         if ($id == '') {
@@ -24,7 +24,7 @@ class Penerbit extends REST_Controller {
         $this->response($buku, 200);
     }
 
-//Mengirim atau menambah data Buku baru
+//Mengirim atau menambah data Penerbit baru
 function index_post() {
     $data = array(
     'id' => $this->post('id'),
@@ -38,7 +38,7 @@ function index_post() {
     }
     }
 
-  //Memperbarui data Buku yang telah ada
+  //Memperbarui data Penerbit yang telah ada
 function index_put() {
     $id = $this->put('id');
     $data = array(
@@ -53,7 +53,7 @@ function index_put() {
     $this->response(array('status' => 'fail', 502));
     }
     }
-    //Menghapus salah satu data Buku
+    //Menghapus salah satu data Penerbit
 function index_delete() {
     $id = $this->delete('id');
     $this->db->where('id', $id);
